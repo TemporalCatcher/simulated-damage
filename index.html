@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Assignement 3</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.0/darkly/bootstrap.min.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Assignement 3</a>
+        </nav>
+
+        <div class="main">
+            <h1>Attack Simulator</h1>
+            <form>
+                <table>
+                    <thead class="table-active">
+                        <th>
+                            <label for="buff1">Attacker</label>
+                        </td>
+                        <th>
+                            <label for="buff2">Defender</label>
+                        </th>
+                    </thead>
+                    <tr class="table-secondary">
+                        <td>
+                            <label for="type1">Type:</label>
+                            <select name="type1" class="form-control" id="type1">
+                                <option value="0">Rock</option>
+                                <option value="2">Paper</option>
+                                <option value="1">Scissors</option>
+                            </select>
+                        </td>
+                        <td>
+                            <label for="type2">Type:</label>
+                            <select name="type2" class="form-control" id="type2">
+                                <option value="0">Rock</option>
+                                <option value="2">Paper</option>
+                                <option value="1">Scissors</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr class="table-secondary">
+                        <td>
+                            <label for="atk">Attack:</label>
+                            <input type="number" class="form-control" min="0" max="255" name="atk" id="atk" value="100">
+                        </td>
+                        <td>
+                            <label for="def">Defense:</label>
+                            <input type="number" class="form-control" min="0" max="255" name="def" id="def" value="100">
+                        </td>
+                    </tr>
+                    <tr class="table-secondary">
+                        <td>
+                            <label for="buff1">Attack Buff(%)</label>
+                            <br>
+                            <label for="buff1">0</label>
+                            <input type="range" class="form-range" min="0" max="100" name="buff1" id="buff1">
+                            <label for="buff1">100</label>
+                        </td>
+                        <td>
+                            <label for="buff2">Defense Buff(%)</label>
+                            <br>
+                            <label for="buff2">0</label>
+                            <input type="range" class="form-range" min="0" max="100" name="buff2" id="buff2">
+                            <label for="buff2">100</label>
+                        </td>
+                    </tr>
+                    <tr class="table-secondary">
+                        <td>
+                            <label for="debuff1">Attack Debuff(%)</label>
+                            <br>
+                            <label for="debuff1">0</label>
+                            <input type="range" class="form-range" min="0" max="100" name="debuff1" id="debuff1">
+                            <label for="debuff1">100</label>
+                        </td>
+                        <td>
+                            <label for="debuff2">Defense DeBuff(%)</label>
+                            <br>
+                            <label for="debuff2">0</label>
+                            <input type="range" class="form-range" min="0" max="100" name="debuff2" id="debuff2">
+                            <label for="debuff2">100</label>
+                        </td>
+                    </tr>
+                    <tr class="table-secondary">
+                        <td>
+                            <label for="chance">Critical chance</label>
+                            <br>
+                            <label for="chance">0</label>
+                            <input type="range" class="form-range" min="0", max="100" name="chance" id="chance" />
+                            <label for="chance">100</label>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                </table>
+                <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+            </form>
+            <div class="result table-success">
+                <h3>Result:</h3>
+                <h4></h4>
+                <h5></h5>
+            </div>
+        </div>
+        
+
+        <script type="text/javascript">
+            var myResult = $('.result');
+            var main = $('.main');
+            myResult.hide();
+
+            var form = $('form');
+            form.on('submit', (e) => {
+                let string = ""
+                for (var i = 0; i < e.target.length - 1; i++) {
+                    string += "&" + e.target[i].name + "=" + e.target[i].value;
+                }
+
+                string = string.substring(1);
+
+                // gets the json from the localhost
+                $.getJSON('http://localhost:3000/damage', string,  (data) => {
+                    let damage = Math.round(data.damage);
+                    $('.result h4').html("Damage: " + damage);
+                    myResult.show();
+                });
+                e.preventDefault();
+            });
+            
+            result.html('Result:<br>' +
+            '');
+            var main = $('.main')[0];
+            
+        </script>
+    </body>
+</html>
