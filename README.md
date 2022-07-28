@@ -44,7 +44,7 @@ example of running in browser for /type
 
 http://localhost:3000/type?type1=0&type2=1
 
-You may use the provided html file or go to
+To see a webpage using this API, You may use the provided html file or go to
 
 https://temporalcatcher.github.io/simulated-damage/
 
